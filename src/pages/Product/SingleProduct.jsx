@@ -10,7 +10,10 @@ function SingleProduct() {
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState("tab-description");
     const [selectedOption, setSelectedOption] = useState(null);
-     
+    const [selectedVoice, setSelectedVoice] = useState(null);
+    const [selectedSms, setSelectedSms] = useState(null);
+    const [selectedData, setSelectedData] = useState(null);
+  
 
 
     const handleOptionChange = (value) => {
@@ -95,7 +98,11 @@ function SingleProduct() {
           </div>
         </div>
       </div>
-      <Offre/>
+      <Offre 
+        onVoiceChange={setSelectedVoice} 
+        onSmsChange={setSelectedSms} 
+        onDataChange={setSelectedData} 
+      />
     </section>
     <section class="service-promotion container">
     <div class="row">
@@ -103,7 +110,7 @@ function SingleProduct() {
         <div class="service-promotion__icon mb-4 theme-color">
           <BsPhone style={{fontSize:'53px'}}/>
         </div>
-        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">60 min</h3>
+        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">Selected Voice: {selectedVoice}</h3>
         <p class="service-promotion__content text-secondary">Voice Offre</p>
       </div>
 
@@ -111,16 +118,16 @@ function SingleProduct() {
         <div class="service-promotion__icon mb-4 theme-color">
         <BsChat style={{fontSize:'53px'}}/>
         </div>
-        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">24/7 Customer Support</h3>
-        <p class="service-promotion__content text-secondary">Friendly 24/7 customer support</p>
+        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">Selected SMS: {selectedSms}</h3>
+        <p class="service-promotion__content text-secondary">SMS</p>
       </div>
 
       <div class="col-md-4 text-center mb-4 pb-1 mb-md-0">
         <div class="service-promotion__icon mb-4 theme-color">
           <BsWifi style={{fontSize:'53px'}}/>
         </div>
-        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">Money Back Guarantee</h3>
-        <p class="service-promotion__content text-secondary">We return money within 30 days</p>
+        <h3 class="service-promotion__title fs-22 fw-bold text-uppercase">Selected Data :{selectedData} </h3>
+        <p class="service-promotion__content text-secondary">Data</p>
       </div>
     </div>
     <button type="submit" style={{width:'100%'}} class="m-4 btn btn-primary btn-addtocart js-open-aside" data-aside="cartDrawer">Add to Cart: Offre Eddawekh</button>

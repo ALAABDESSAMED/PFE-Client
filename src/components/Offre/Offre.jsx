@@ -1,80 +1,61 @@
-import React ,{useState} from 'react'
+// Offre.js (Component B)
+import React, { useState } from 'react';
 import RadioOption from '../../components/RadioOption/RadioOption';
 
-
 function Offre() {
-    const [activeTab, setActiveTab] = useState("tab-description");
-    const handleTabClick = (tabId) => {
-        setActiveTab(tabId);
-      };
-    const OffreData =[
-        {
-          id:1,
-          value:35,
-          label:"GO",
-        },
-        {
-          id:2,
-          value:45,
-          label:"GO",
-        },
-        {
-          id:3,
-          value:55,
-          label:"GO",
-        },
-        {
-          id:4,
-          value:65,
-          label:"GO",
-        },
-        {
-          id:5,
-          value:75,
-          label:"GO",
-        }
-       ];
-       const OffreVoice =[
-        {
-          id:1,
-          value:25,
-          label:"Min/Mil",
-        },
-        {
-          id:2,
-          value:60,
-          label:"Min/Mil",
-        },
-        {
-          id:3,
-          value:75,
-          label:"Min/Mil",
-        },
-        {
-          id:4,
-          value:2935,
-          label:"Min/Mil",
-        }
-       ];
-       const OffreSms =[
-        {
-          id:1,
-          value:22,
-          label:"sms/gratuit",
-        },
-        {
-          id:2,
-          value:55,
-          label:"sms/gratuit",
-        },
-        {
-          id:3,
-          value:125,
-          label:"sms/gratuit",
-        },
-       ]
+  const [activeTab, setActiveTab] = useState("tab-description");
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+  };
+
+  const handleOptionChange = (value) => {
+    // Update state based on which tab is active
+    switch (activeTab) {
+      case "tab-description":
+        setDataSelected(value);
+        break;
+      case "tab-additional-info":
+        setSmsSelected(value);
+        break;
+      case "tab-reviews":
+        setVoiceSelected(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Define states for selected options
+  const [smsSelected, setSmsSelected] = useState(null);
+  const [voiceSelected, setVoiceSelected] = useState(null);
+  const [dataSelected, setDataSelected] = useState(null);
+
+  // Data for radio options
+  const OffreData = [
+    { id: 1, value: 35, label: "GO" },
+    { id: 2, value: 45, label: "GO" },
+    { id: 3, value: 55, label: "GO" },
+    { id: 4, value: 65, label: "GO" },
+    { id: 5, value: 75, label: "GO" }
+  ];
+
+  const OffreVoice = [
+    { id: 1, value: 25, label: "Min/Mil" },
+    { id: 2, value: 60, label: "Min/Mil" },
+    { id: 3, value: 75, label: "Min/Mil" },
+    { id: 4, value: 2935, label: "Min/Mil" }
+  ];
+
+  const OffreSms = [
+    { id: 1, value: 22, label: "sms/gratuit" },
+    { id: 2, value: 55, label: "sms/gratuit" },
+    { id: 3, value: 125, label: "sms/gratuit" }
+  ];
+
   return (
     <div className="product-single__details-tab ">
+      
       <ul className="nav nav-tabs" id="myTab" role="tablist">
         <li className="nav-item" role="presentation">
           <a
@@ -123,38 +104,7 @@ function Offre() {
           role="tabpanel"
           aria-labelledby="tab-description-tab"
         >
-
-          <RadioOption options={OffreData}/>
-          {/* <div className='row gap-2'>
-          <div onClick={()=>handleOptionChange('45')} className={`col-md-3 text-center mb-5 mb-md-0 bg-white shadow-sm rounded-3 ${selectedOption==='45' ? 'border-black':''}`} style={{ cursor: 'pointer' }}>
-            <label>
-              <input
-                type="radio"
-                name="promotionOption"
-                value="45"
-                className='d-none'
-                checked={selectedOption === "45"}
-                onChange={() => handleOptionChange("45")}
-              />
-              <h3 className="service-promotion__title fs-22 fw-bold text-uppercase">45</h3>
-              <p className="service-promotion__content text-secondary">min/mil</p>
-            </label>
-          </div>
-          <div onClick={()=>handleOptionChange('36')} className={`col-md-3 text-center mb-5 mb-md-0 bg-white shadow-sm rounded-3 ${selectedOption==='36' ? 'border-black':''}`} style={{ cursor: 'pointer' }}>
-            <label>
-              <input
-                type="radio"
-                name="promotionOption"
-                value="36"
-                className='d-none'
-                checked={selectedOption === "36"}
-                onChange={() => handleOptionChange("36")}
-              />
-              <h3 className="service-promotion__title fs-22 fw-bold text-uppercase">36</h3>
-              <p className="service-promotion__content text-secondary">min/mil</p>
-            </label>
-          </div>
-          </div> */}
+          <RadioOption options={OffreData} onOptionChange={handleOptionChange} />
         </div>
         <div
           className={`tab-pane fade ${activeTab === "tab-additional-info" ? "show active" : ""}`}
@@ -162,7 +112,7 @@ function Offre() {
           role="tabpanel"
           aria-labelledby="tab-additional-info-tab"
         >
-          <RadioOption options={OffreSms} />
+          <RadioOption options={OffreSms} onOptionChange={handleOptionChange} />
         </div>
         <div
           className={`tab-pane fade ${activeTab === "tab-reviews" ? "show active" : ""}`}
@@ -170,11 +120,11 @@ function Offre() {
           role="tabpanel"
           aria-labelledby="tab-reviews-tab"
         >
-                    <RadioOption options={OffreVoice}/>
+          <RadioOption options={OffreVoice} onOptionChange={handleOptionChange} />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Offre
+export default Offre;
